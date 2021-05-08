@@ -4,7 +4,15 @@ import {
   REMOVE_STORY,
   HANDLE_PAGE,
   HANDLE_SEARCH,
-} from './actions'
+} from "./actions";
 
-const reducer = () => {}
-export default reducer
+const reducer = (state, action) => {
+  switch (action.type) {
+    case SET_LOADING:
+      return { ...state, isLoading: true };
+
+    default:
+      throw new Error(`No matching ${action.type} action type`);
+  }
+};
+export default reducer;
