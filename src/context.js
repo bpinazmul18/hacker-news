@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useReducer } from "react";
 import {
   SET_LOADING,
   SET_STORIES,
-  REMOVE_STORY,
-  HANDLE_PAGE,
-  HANDLE_SEARCH,
+  // REMOVE_STORY,
+  // HANDLE_PAGE,
+  // HANDLE_SEARCH,
 } from "./actions";
 import reducer from "./reducer";
 
@@ -34,8 +34,6 @@ const AppProvider = ({ children }) => {
         type: SET_STORIES,
         payload: { hits: data.hits, nbPages: data.nbPages },
       });
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +41,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
-  }, []);
+  }, [state.page, state.query]);
   return (
     <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
   );
