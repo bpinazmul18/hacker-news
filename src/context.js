@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useReducer } from "react";
 import {
   SET_LOADING,
   SET_STORIES,
-  // REMOVE_STORY,
+  REMOVE_STORY,
   // HANDLE_PAGE,
   // HANDLE_SEARCH,
 } from "./actions";
@@ -42,8 +42,15 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
   }, [state.page, state.query]);
+
+  const removeStory = (id) => {
+    dispatch({ type: REMOVE_STORY, payload: id });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, removeStory }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 // make sure use

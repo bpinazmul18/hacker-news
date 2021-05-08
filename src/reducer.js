@@ -1,7 +1,7 @@
 import {
   SET_LOADING,
   SET_STORIES,
-  // REMOVE_STORY,
+  REMOVE_STORY,
   // HANDLE_PAGE,
   // HANDLE_SEARCH,
 } from "./actions";
@@ -19,6 +19,11 @@ const reducer = (state, action) => {
         nbPages: action.payload.nbPages,
       };
 
+    case REMOVE_STORY:
+      const newHits = state.hits.filter(
+        (story) => story.objectID !== action.payload.id
+      );
+      return { ...state, hits: newHits };
     default:
       throw new Error(`No matching ${action.type} action type`);
   }
