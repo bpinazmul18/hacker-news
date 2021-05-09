@@ -5,7 +5,7 @@ import {
   SET_STORIES,
   REMOVE_STORY,
   // HANDLE_PAGE,
-  // HANDLE_SEARCH,
+  HANDLE_SEARCH,
 } from "./actions";
 import reducer from "./reducer";
 
@@ -47,8 +47,12 @@ const AppProvider = ({ children }) => {
     dispatch({ type: REMOVE_STORY, payload: id });
   };
 
+  const handleSearch = (query) => {
+    dispatch({ type: HANDLE_SEARCH, payload: query });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, removeStory }}>
+    <AppContext.Provider value={{ ...state, removeStory, handleSearch }}>
       {children}
     </AppContext.Provider>
   );

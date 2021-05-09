@@ -3,7 +3,7 @@ import {
   SET_STORIES,
   REMOVE_STORY,
   // HANDLE_PAGE,
-  // HANDLE_SEARCH,
+  HANDLE_SEARCH,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -21,9 +21,12 @@ const reducer = (state, action) => {
 
     case REMOVE_STORY:
       const newHits = state.hits.filter(
-        (story) => story.objectID !== action.payload.id
+        (story) => story.objectID !== action.payload
       );
       return { ...state, hits: newHits };
+
+    case HANDLE_SEARCH:
+      return { ...state, query: action.payload, page: 0 };
     default:
       throw new Error(`No matching ${action.type} action type`);
   }
